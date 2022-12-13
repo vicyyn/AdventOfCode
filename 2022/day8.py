@@ -33,3 +33,40 @@ for r in range(ROWS-2,0, - 1):
         arr[r][COLS-1] = max(arr[r][c],arr[r][COLS-1])
 
 print(res)
+
+# Part 2
+ROWS , COLS = len(arr) , len(arr[0])
+res = 1
+
+
+for r in range(1,ROWS - 1):
+    for c in range(1,COLS - 1):
+        node = arr[r][c]
+        up , down , right , left = 1 , 1 , 1 , 1 
+        for i in range(c + 1,COLS):
+            if arr[r][i] < node:
+                right += 1
+            else:
+                break
+
+        for i in range(c - 1,-1,-1):
+            if arr[r][i] < node:
+                left += 1
+            else:
+                break
+
+        for i in range(r + 1,ROWS):
+            if arr[i][c] < node:
+                up += 1
+            else:
+                break
+
+        for i in range(r - 1,-1,-1):
+            if arr[i][c] < node:
+                down += 1
+            else:
+                break
+
+        res = max(res,up * down * right * left)
+
+print(res)
